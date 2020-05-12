@@ -1,9 +1,12 @@
 <?php 
+		
+	//namespace Modelo;	
 
 	class Cliente{
 
 		//Atributos
-		private $id_clientecliente $nome;
+		private $id_cliente;
+		private $nome;
 		private $cpf;
 		private $email;
 		private $telefone;
@@ -95,8 +98,6 @@
 
 		}
 
-	}
-	
 	}
 
 ?>
