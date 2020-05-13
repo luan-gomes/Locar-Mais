@@ -10,11 +10,28 @@
 
 		//Método Construtor
 
-		public function __construct($username,$password){
+		public function __construct($username,$password,$id){
 
 			$this->setUsername($username);
 			$this->setPassword($password);
+			$this->setFuncionario_id($id);
 
+		}
+
+		//Método para cadastrar o login de funcionário
+
+		public function cadastrar_login(){
+			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
+			$sql = $pdo->prepare("INSERT INTO login VALUES (null,?,?,?)");
+			$sql->execute(array($this->getUsername(),$this->getPassword(),$this->getFuncionario_id()));
+		}
+
+		//Método para cadastrar o login de cliente
+
+		public function cadastrar_login_cliente(){
+			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
+			$sql = $pdo->prepare("INSERT INTO login_cliente VALUES (null,?,?,?)");
+			$sql->execute(array($this->getUsername(),$this->getPassword(),$this->getFuncionario_id()));
 		}
 
 		//Métodos get e set de cada um dos atributos para manipulação

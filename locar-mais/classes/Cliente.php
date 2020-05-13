@@ -1,40 +1,60 @@
-<?php
+<?php 
+		
+	//namespace Modelo;	
 
-	class Funcionario{
+	class Cliente{
 
 		//Atributos
-		private $id_funcionario;
+		private $id_cliente;
 		private $nome;
 		private $cpf;
-		private $ctps;
 		private $email;
 		private $telefone;
 		private $data_nascimento;
 
 		//Construtor
 
-		public function __construct($nome, $cpf, $ctps, $email, $telefone, $data_nascimento){
+		public function __construct($nome, $cpf, $email, $telefone, $data_nascimento){
 
 			$this->setNome($nome);
 			$this->setCpf($cpf);
-			$this->setCtps($ctps);
 			$this->setEmail($email);
 			$this->setTelefone($telefone);
 			$this->setData_nascimento($data_nascimento);
 
 		}
 
-		//Métodos get e set de cada um dos atributos para manipulação
+		//Método para inserir os dados no banco
 
-		public function setId_funcionario($id_funcionario){
+		public function cadastrar_cliente(){
+			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
+			$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+			$sql = $pdo->prepare("INSERT INTO cliente VALUES (null,?,?,?,?,?)");
+ 			$sql->execute(array($this->getNome(),$this->getCpf(),$this->getEmail(),$this->getTelefone(),$this->getData_nascimento()));
 
-			$this->id_funcionario = $id_funcionario;
+ 			//setando o id
+
+ 			$sql_two = $pdo->prepare("SELECT id_cliente FROM cliente WHERE nome=? and cpf=?");
+ 			$sql_two->execute(array($this->getNome(),$this->getCpf()));
+ 			$selecao = $sql_two->fetch(PDO::FETCH_ASSOC);
+
+ 			foreach ($selecao as $key => $value) {
+ 				$this->setId_cliente($value);
+ 			}
 
 		}
 
-		public function getId_funcionario(){
+		//Métodos get e set de cada um dos atributos para manipulação
 
-			return $this->id_funcionario;
+		public function setId_cliente($id_cliente){
+
+			$this->id_cliente = $id_cliente;
+
+		}
+
+		public function getId_cliente(){
+
+			return $this->id_cliente;
 
 		}
 
@@ -59,18 +79,6 @@
 		public function getCpf(){
 
 			return $this->cpf;
-
-		}
-
-		public function setCtps($ctps){
-
-			$this->ctps = $ctps;
-
-		}
-
-		public function getCtps(){
-
-			return $this->ctps;
 
 		}
 

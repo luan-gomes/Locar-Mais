@@ -2,7 +2,6 @@
 
 	class Veiculo{
 
-
 		//Atributos 
 		private $id_veiculo;
 		private $chassi;
@@ -21,6 +20,13 @@
 			$this->setQuilometragem($quilometragem);
 			$this->setDisponibilidade(true);
 
+		}
+
+		public function cadastrar_veiculo(){
+			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
+			$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+			$sql->prepare("INSERT INTO veiculo VALUES (null,?,?,?,?,?)");
+			$sql->execute(array($this->getChassi(),$this->getPlaca(),$this->getModelo(),$this->getQuilometragem(),$this->getDisponibilidade()));
 		}
 
 		//Métodos get e set de cada um dos atributos para manipulação
