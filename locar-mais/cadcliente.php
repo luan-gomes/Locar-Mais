@@ -20,8 +20,13 @@
 		$pass = $_POST['pass'];
 		$ident = $client->getId_cliente();
 
-		$login = new Login($user,$pass,$ident);
+		/*$login = new Login($user,$pass,$ident);
+		$login->cadastrar_login_cliente();*/
+
+		$login = new Login($user,$pass);
+		$login->setFuncionario_id($ident);
 		$login->cadastrar_login_cliente();
+
 	}
 
 

@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	include('classes/Login.php');
 
 	//Simulação de login
@@ -9,12 +10,11 @@
 		$pass = $_POST['pass'];
 
 		$login = new Login($user,$pass);
-		$liberacao = $login->validar_funcionario();
+		$liberacao = $login->validar_cliente();
 
 		if($liberacao==true){
-			
-			header('Location: cadfuncionario.php');
-
+			$_SESSION["usuario"] = $login;
+			header('Location: reserva.php');
 		} else {
 			echo 'arf';
 		}
@@ -27,13 +27,13 @@
 	<head>
 		
 		<meta charset="UTF-8" />
-		<title>Locar Mais | Login Funcionários</title>
+		<title>Locar Mais | Login Cliente</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 	</head>
 
 		<div id="login-form">
-			<span>Login - Funcionário</span>
+			<span>Login - Cliente</span>
 			<form method="post">
 
 				<input type="text" name="user" placeholder="Nome de usuário" required />

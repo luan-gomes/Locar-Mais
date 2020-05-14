@@ -10,11 +10,11 @@
 
 		//Método Construtor
 
-		public function __construct($username,$password,$id){
+		public function __construct($username,$password){
 
 			$this->setUsername($username);
 			$this->setPassword($password);
-			$this->setFuncionario_id($id);
+			//$this->setFuncionario_id($id);
 
 		}
 
@@ -32,6 +32,44 @@
 			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
 			$sql = $pdo->prepare("INSERT INTO login_cliente VALUES (null,?,?,?)");
 			$sql->execute(array($this->getUsername(),$this->getPassword(),$this->getFuncionario_id()));
+		}
+
+		//Método para validar login de funcionário
+
+		public function validar_funcionario(){
+			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
+			$sql = $pdo->prepare("SELECT * FROM login WHERE username=? and pass=?");
+			$sql->execute(array($this->getUsername(),$this->getPassword()));
+			$selecao = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			if($selecao==null){
+				return false;
+			}
+			else {
+				foreach ($selecao as $key => $value) {
+					$this->setFuncionario_id($value['funcionario_id']);
+					return true;
+				}
+			}
+		}
+
+		//Método para validar login de cliente
+
+		public function validar_cliente(){
+			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
+			$sql = $pdo->prepare("SELECT * FROM login_cliente WHERE user_cliente=? and pass_cliente=?");
+			$sql->execute(array($this->getUsername(),$this->getPassword()));
+			$selecao = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			if($selecao==null){
+				return false;
+			}
+			else {
+				foreach ($selecao as $key => $value) {
+					$this->setFuncionario_id($value['cliente_id']);
+					return true;
+				}
+			}
 		}
 
 		//Métodos get e set de cada um dos atributos para manipulação

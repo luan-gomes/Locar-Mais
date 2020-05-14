@@ -21,7 +21,11 @@
 		$pass = $_POST['pass'];
 		$ident = $worker->getId_funcionario();
 
-		$login = new Login($user,$pass,$ident);
+		/*$login = new Login($user,$pass,$ident);
+		$login->cadastrar_login();*/
+
+		$login = new Login($user,$pass);
+		$login->setFuncionario_id($ident);
 		$login->cadastrar_login();
 
 	}
