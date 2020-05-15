@@ -9,24 +9,26 @@
 		private $modelo;
 		private $quilometragem;
 		private $disponibilidade;
+		private $diaria;
 
 		//Método Construtor
 
-		public function __construct($chassi, $placa, $modelo, $quilometragem){
+		public function __construct($chassi, $placa, $modelo, $quilometragem, $diaria){
 
 			$this->setChassi($chassi);
 			$this->setPlaca($placa);
 			$this->setModelo($modelo);
 			$this->setQuilometragem($quilometragem);
 			$this->setDisponibilidade(true);
+			$this->setDiaria($diaria);
 
 		}
 
 		public function cadastrar_veiculo(){
 			$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
 			$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-			$sql->prepare("INSERT INTO veiculo VALUES (null,?,?,?,?,?)");
-			$sql->execute(array($this->getChassi(),$this->getPlaca(),$this->getModelo(),$this->getQuilometragem(),$this->getDisponibilidade()));
+			$sql = $pdo->prepare("INSERT INTO veiculo VALUES (null,?,?,?,?,?,?)");
+			$sql->execute(array($this->getChassi(),$this->getPlaca(),$this->getModelo(),$this->getQuilometragem(),$this->getDisponibilidade(),$this->getDiaria()));
 		}
 
 		//Métodos get e set de cada um dos atributos para manipulação
@@ -85,7 +87,7 @@
 
 		}
 
-		public function getQuilometrageme(){
+		public function getQuilometragem(){
 
 			return $this->quilometragem;
 
@@ -101,7 +103,19 @@
 
 			return $this->disponibilidade;
 
-		}						
+		}		
+
+		public function setDiaria($diaria){
+
+			$this->diaria = $diaria;
+
+		}
+
+		public function getDiaria(){
+
+			return $this->diaria;
+
+		}				
 	}
 	
 ?>

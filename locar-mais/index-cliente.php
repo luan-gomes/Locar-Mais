@@ -16,7 +16,7 @@
 			$_SESSION["usuario"] = $login;
 			header('Location: reserva.php');
 		} else {
-			echo 'arf';
+			echo 'Não foi dessa vez!';
 		}
 	}
 

@@ -58,7 +58,11 @@ Cinza escuro: #1B1B1B;
   	border-top: 1px solid rgba(0, 0, 0, 0.025);
 	border-bottom-color: rgba(0, 0, 0, 0.2);
      border-top-color: rgba(255, 255, 255, 0.05);
-     color: #919496;
+}
+
+#side-menu ul li a{
+	text-decoration: none;
+	color: #919496;
 }
 
 #side-menu ul li:hover{

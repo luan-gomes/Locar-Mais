@@ -1,6 +1,8 @@
 <?php 
 	include('classes/Login.php');
 	include('classes/Cliente.php');
+	include('classes/Reserva.php');
+
 	session_start();
 
 	$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
@@ -14,6 +16,16 @@
  	foreach ($selecao as $key => $value) {
  		$cliente = new Cliente($value['nome'],$value['cpf'],$value['email'],$value['telefone'],$value['data_nascimentp']);
  		$cliente->setId_cliente($value['id_cliente']);
+ 	}
+
+ 	if(isset($_POST['acao'])){
+ 		$date = new DateTime($_POST['dtreserva']);
+ 		$date2 = new DateTime($_POST['devolucao']);
+ 		$valor = date_diff($date,$date2);
+
+ 		$reserva = new Reserva($_POST['dtreserva'],$_POST['devolucao'],$valor->days*100,$cliente->getId_cliente(),$_POST['identificador']);
+
+ 		$reserva->cadastrar_reserva();
  	}
 
 ?>
@@ -56,8 +68,8 @@
 		 			foreach ($selecao as $key => $value) {
 		 				echo '<hr/>';
 		 				echo '</br>';
-		 				echo 'Identificador do veículo: '.$value['chassi'];
-		 				echo '</br';
+		 				echo 'Identificador do veículo: '.$value['id_veiculo'];
+		 				echo '</br>';
 		 				echo 'Chassi: '.$value['chassi'];
 		 				echo '</br>';
 		 				echo 'Placa: '.$value['placa'];
@@ -67,6 +79,8 @@
 		 				echo 'Quilometragem: '.$value['quilometragem'];
 		 				echo '</br>';
 		 				echo 'Disponibilidade: '.$value['disponibilidade'];
+		 				echo '</br>';
+		 				echo 'Valor da diária: '.$value['diaria'];
 		 				echo '</br>';
 		 				echo '</br>';
 		 			}

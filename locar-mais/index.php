@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	include('classes/Login.php');
 
 	//Simulação de login
@@ -12,11 +13,10 @@
 		$liberacao = $login->validar_funcionario();
 
 		if($liberacao==true){
-			
-			header('Location: cadfuncionario.php');
-
+			$_SESSION["usuario"] = $login;
+			header('Location: cadcliente.php');
 		} else {
-			echo 'arf';
+			echo 'Não foi dessa vez!';
 		}
 	}
 

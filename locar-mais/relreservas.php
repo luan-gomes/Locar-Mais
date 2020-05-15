@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Locar Mais - Relatório de Veículos</title>
+		<title>Locar Mais - Relatório de Reservas</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 
@@ -32,28 +32,28 @@
 
 			<div id="formulario">
 
-				<h1>Relatório de Veículos</h1>
+				<h1>Relatório de Reservas</h1>
 
 				<?php
 					$pdo = new PDO('mysql:host=localhost;dbname=locar_mais','root','');
-					$sql_two = $pdo->prepare("SELECT * FROM veiculo");
+					$sql_two = $pdo->prepare("SELECT * FROM reserva");
 		 			$sql_two->execute();
 		 			$selecao = $sql_two->fetchAll(PDO::FETCH_ASSOC);
 
 		 			foreach ($selecao as $key => $value) {
 		 				echo '<hr/>';
 		 				echo '</br>';
-		 				echo 'Chassi: '.$value['chassi'];
+		 				echo 'Data da locação: '.$value['dt_locacao'];
 		 				echo '</br>';
-		 				echo 'Placa: '.$value['placa'];
+		 				echo 'Data da devolução: '.$value['dt_vecolucao'];
 		 				echo '</br>';
-		 				echo 'Modelo: '.$value['modelo'];
+		 				echo 'Valor: '.$value['valor'];
 		 				echo '</br>';
-		 				echo 'Quilometragem: '.$value['quilometragem'];
+		 				echo 'Confirmada: '.$value['confirmada'];
 		 				echo '</br>';
-		 				echo 'Disponibilidade: '.$value['disponibilidade'];
+		 				echo 'Cliente: '.$value['cliente_id'];
 		 				echo '</br>';
-		 				echo 'Valor da diária: '.$value['diaria'];
+		 				echo 'Carro: '.$value['veiculo_id'];
 		 				echo '</br>';
 		 				echo '</br>';
 		 			}

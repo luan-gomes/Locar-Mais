@@ -3,6 +3,8 @@
 	include('classes/Login.php');
 	include('classes/Cliente.php');
 
+	session_start();
+
 	if(isset($_POST['acao'])){
 
 		$nome = $_POST['nome'];
@@ -52,13 +54,14 @@
 				</div> <!-- identity -->
 
 				<ul>
-					<li>Cadastrar cliente</li>
-					<li>Validar devolução</li>
-					<li>Cadastrar funcionário</li>
-					<li>Cadastrar veículo</li>
-					<li>Relatório de clientes</li>
-					<li>Relatório de veículos</li>
-					<li>Relatório de reservas</li>
+					<li><a href="cadcliente.php">Cadastrar cliente</a></li>
+					<li><a href="devolucao.php">Validar devolução</a></li>
+					<li><a href="validarlocacao.php">Validar reserva</a></li>
+					<li><a href="cadfuncionario.php">Cadastrar funcionário</a></li>
+					<li><a href="cadveiculo.php">Cadastrar veículo</a></li>
+					<li><a href="relclientes.php">Relatório de clientes</a></li>
+					<li><a href="relveiculos.php">Relatório de veículos</a></li>
+					<li><a href="relreservas.php">Relatório de reservas</a></li>
 				</ul>			
 				
 			</div> <!-- side-menu -->

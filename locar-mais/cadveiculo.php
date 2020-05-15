@@ -8,8 +8,9 @@
 		$placa = $_POST['placa'];
 		$modelo = $_POST['modelo'];
 		$km = $_POST['km'];
+		$valor = $_POST['diaria'];
 
-		$car = new Veiculo($chassi,$placa,$modelo,$km);
+		$car = new Veiculo($chassi,$placa,$modelo,$km,$valor);
 		$car->cadastrar_veiculo();
 
 		//criar o processo de login do cliente 
@@ -37,13 +38,14 @@
 				</div> <!-- identity -->
 
 				<ul>
-					<li>Cadastrar cliente</li>
-					<li>Validar devolução</li>
-					<li>Cadastrar funcionário</li>
-					<li>Cadastrar veículo</li>
-					<li>Relatório de clientes</li>
-					<li>Relatório de veículos</li>
-					<li>Relatório de reservas</li>
+					<li><a href="cadcliente.php">Cadastrar cliente</a></li>
+					<li><a href="devolucao.php">Validar devolução</a></li>
+					<li><a href="validarlocacao.php">Validar reserva</a></li>
+					<li><a href="cadfuncionario.php">Cadastrar funcionário</a></li>
+					<li><a href="cadveiculo.php">Cadastrar veículo</a></li>
+					<li><a href="relclientes.php">Relatório de clientes</a></li>
+					<li><a href="relveiculos.php">Relatório de veículos</a></li>
+					<li><a href="relreservas.php">Relatório de reservas</a></li>
 				</ul>			
 				
 			</div> <!-- side-menu -->
@@ -64,6 +66,9 @@
 
 					<label for="km">Quilometragem</label>
 					<input type="text" name="km" placeholder="Em km" required />
+
+					<label for="diaria">Valor da diária</label>
+					<input type="text" name="diaria" placeholder="Valor da diária" required />
 					
 					<div>
 						<input type="submit" name="acao" value="Enviar!" />
